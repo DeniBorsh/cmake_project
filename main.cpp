@@ -1,11 +1,20 @@
-#include "adder.h"
 #include "GLFW/glfw3.h"
+#include <MyProjectConfig.h>
 #include <iostream>
+#ifdef USE_ADDER
+    #include "adder.h"
+#endif
 
 using namespace std;
 
 int main(int argc, char** argv) {
-    cout << mearlymath::add(40, 2) << endl;
+#ifdef USE_ADDER
+    cout << "ADDER: " << mearlymath::add(40, 2) << endl;
+#else
+    cout << 40 + 2 << endl;
+#endif
+    cout << argv[0] << " Version " 
+         << MyProject_VERSION_MAJOR << "." << MyProject_VERSION_MINOR << endl;
 
     GLFWwindow* window;
     if (!glfwInit()) {
